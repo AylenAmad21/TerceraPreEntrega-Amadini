@@ -75,14 +75,17 @@
 
         {% block contenidoQueCambia %}
         <!--Aquí va lo que cambia, y lo asociado a está vista :) -->
-        <h1>Registro de Entregables</h1>
-        <form action="{% url 'Entregables' %}" method="post">{% csrf_token %}
-            <p>Nombre: <input type="text" name="Nombre"></p>
-            <p>Fecha de Entrega: <input type="date" name="FechaDeEntrega"></p>
-            <p>Entregado: <input type="checkbox" name="Entregado"></p>
+            <h1>Registro de Entregables</h1>
+            <form action="{% url 'Entregables' %}" method="post">{% csrf_token %}
+                <table>
+                
+                {{miFormulario.as_table}}
 
-            <button type="submit">Enviar</button>
-        </form>
+                <p>Ingrese Fecha en este formato: aaaa/mm/dd</p>
+
+                </table>
+                <button type="submit">Enviar</button>
+            </form>
 
         {% endblock  %}
         <!-- Footer-->

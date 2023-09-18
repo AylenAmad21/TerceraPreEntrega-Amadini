@@ -56,7 +56,7 @@ class Entregable(models.Model):
 
     nombre= models.CharField(max_length=30)
     fechaDeEntrega= models.DateField()
-    entregado=models.BooleanField()
+    entregado = models.BooleanField()
 
     def __str__(self):
         return f'{self.nombre} - {self.fechaDeEntrega} - {self.entregado}'
@@ -64,6 +64,6 @@ class Entregable(models.Model):
     class Meta():
         verbose_name = 'Entregable'
         verbose_name_plural = 'Entregables'
-        ordering = ('nombre', '-fechaDeEntrega',)
-        unique_together = ('nombre', 'fechaDeEntrega')
+        ordering = ('nombre', '-fechaDeEntrega', '-entregado')
+        unique_together = ('nombre', 'fechaDeEntrega', 'entregado')
 

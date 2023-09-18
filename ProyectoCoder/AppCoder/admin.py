@@ -16,6 +16,11 @@ class ProfesorAdmin(admin.ModelAdmin):
     search_fields=['nombre', 'apellido','email','profesion']
     list_filter=['email','profesion']
 
+class EntregableAdmin(admin.ModelAdmin):
+    list_display=['nombre', 'fechaDeEntrega','entregado']
+    search_fields=['nombre', 'fechaDeEntrega', 'entregado']
+    list_filter=['nombre' , 'fechaDeEntrega', 'entregado']
+
 # Register your models here.
 
 admin.site.register(Curso, CursoAdmin)
@@ -24,4 +29,4 @@ admin.site.register(Estudiante, EstudianteAdmin)
 
 admin.site.register(Profesor, ProfesorAdmin)
 
-admin.site.register(Entregable)
+admin.site.register(Entregable, EntregableAdmin)

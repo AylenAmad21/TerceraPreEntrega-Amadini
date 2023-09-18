@@ -75,14 +75,15 @@
 
         {% block contenidoQueCambia %}
         <!--Aquí va lo que cambia, y lo asociado a está vista :) -->
-        <h1>Registro de Estudiantes</h1>
-        <form action="{% url 'Estudiantes' %}" method="post">{% csrf_token %}
-            <p>Nombre: <input type="text" name="Nombre"></p>
-            <p>Apellido: <input type="text" name="Apellido"></p>
-            <p>Email: <input type="email" name="Email"></p>
+            <h1>Registro de Estudiantes</h1>
+            <form action="{% url 'Estudiantes' %}" method="post">{% csrf_token %}
+                <table>
 
-            <button type="submit">Enviar</button>
-        </form>
+                {{miFormulario.as_table}}
+
+                </table>
+                <button type="submit">Enviar</button>
+            </form>
 
 
         {% endblock  %}

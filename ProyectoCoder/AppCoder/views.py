@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render 
 from django.http import HttpResponse
 from AppCoder.models import Curso,Estudiante,Profesor,Entregable
 from AppCoder.forms import CursoFormulario,ProfesorFormulario,EstudianteFormulario,EntregableFormulario
@@ -8,7 +8,7 @@ from AppCoder.forms import CursoFormulario,ProfesorFormulario,EstudianteFormular
 
 def inicio(request):
     context = {'inicio': 'Inicio'}
-    return render(request, "inicio.html",context)
+    return render(request, "AppCoder/inicio.html",context)
 
 def cursos(request):
     print('method', request.method)
@@ -20,30 +20,28 @@ def cursos(request):
             
  
             if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  curso = Curso(nombre=informacion["curso"], camada=informacion["camada"])
-                  curso.save()
+                informacion = miFormulario.cleaned_data
+                curso = Curso(nombre=informacion["curso"], camada=informacion["camada"])
+                curso.save()
 
-            return render(request, "inicio.html")
+            return render(request, "AppCoder/inicio.html")
     else:
     
         miFormulario = CursoFormulario()
  
-    return render(request, "cursos.html", {"miFormulario": miFormulario})
-
+    return render(request, "AppCoder/cursos.html", {"miFormulario": miFormulario})
 
 def listar_cursos(request):
     lista = Curso.objects.all()
     return render(request, "lista_cursos.html" , {"lista_cursos":lista})
 
 def profesores(request):
-    print('method', request.method)
-    print('POST', request.POST)
-
-    if request.method == 'POST':
+      
+      if request.method == 'POST':
  
             miFormulario = ProfesorFormulario(request.POST) # Aqui me llega la informacion del html
             
+            print(miFormulario)
  
             if miFormulario.is_valid():
                   informacion = miFormulario.cleaned_data
@@ -51,11 +49,11 @@ def profesores(request):
                   profesor.save()
 
             return render(request, "inicio.html")
-    else:
+      else:
     
         miFormulario = ProfesorFormulario()
  
-    return render(request, "profesores.html", {"miFormulario": miFormulario})
+      return render(request, "AppCoder/profesores.html", {"miFormulario": miFormulario})
 
 def estudiantes(request):
     print('method', request.method)
@@ -67,16 +65,15 @@ def estudiantes(request):
             
  
             if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  entregable = Estudiante(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"])
-                  entregable.save()
+                informacion = miFormulario.cleaned_data
+                estudiante = Estudiante(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"])
+                estudiante.save()
 
-            return render(request, "inicio.html")
+            return render(request, "AppCoder/inicio.html")
     else:
-    
-        miFormulario = EstudianteFormulario()
- 
-    return render(request, "estudiantes.html", {"miFormulario": miFormulario})
+        miFormulario=EstudianteFormulario()
+
+    return render(request, "AppCoder/estudiantes.html", {"miFormulario": miFormulario})
 
 def entregables(request):
     print('method', request.method)
@@ -88,16 +85,16 @@ def entregables(request):
             
  
             if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  entregable = Entregable(nombre=informacion["nombre"], fechadeentrega=informacion["fechaDeEntrega"])
-                  entregable.save()
+                informacion = miFormulario.cleaned_data
+                entregable = Entregable(nombre=informacion["nombre"], fechaDeEntrega=informacion["fechaDeEntrega"], entregado=informacion["entregado"])
+                entregable.save()
 
-            return render(request, "inicio.html")
+            return render(request, "AppCoder/inicio.html")
     else:
     
         miFormulario = EntregableFormulario()
  
-    return render(request, "entregables.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/entregables.html", {"miFormulario": miFormulario})
 
 def cursoFormulario(request):
     print('method', request.method)
@@ -118,7 +115,7 @@ def cursoFormulario(request):
     
         miFormulario = CursoFormulario()
  
-    return render(request, "cursoFormulario.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/cursoFormulario.html", {"miFormulario": miFormulario})
 
 def profesoresFormulario(request):
     print('method', request.method)
@@ -134,12 +131,12 @@ def profesoresFormulario(request):
                       profesores_ = Profesor(nombre=informacion["Nombre"], apellido=informacion["Apellido"], email=informacion["Email"],profesion=informacion["Profesion"])
                       profesores_.save()
 
-                return render(request, "inicio.html")
+                return render(request, "AppCoder/inicio.html")
     else:
     
         miFormulario = ProfesorFormulario()
  
-    return render(request, "profesores.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/profesores.html", {"miFormulario": miFormulario})
 
 def estudiantesFormulario(request):
     print('method', request.method)
@@ -147,20 +144,20 @@ def estudiantesFormulario(request):
 
     if request.method == 'POST':
  
-                miFormulario = EstudianteFormulario(request.POST) # Aqui me llega la informacion del html
+                miForm = EstudianteFormulario(request.POST) # Aqui me llega la informacion del html
             
  
-                if miFormulario.is_valid():
-                      informacion = miFormulario.cleaned_data
-                      estudiantes_ = Estudiante(nombre=informacion["Nombre"], apellido=informacion["Apellido"], email=informacion["Email"])
-                      estudiantes_.save()
+                if miForm.is_valid():
+                      informacion = miForm.cleaned_data
+                      estudiante = Estudiante(nombre=informacion["Nombre"], apellido=informacion["Apellido"], email=informacion["Email"])
+                      estudiante.save()
 
-                return render(request, "inicio.html")
+                return render(request, "AppCoder/inicio.html")
     else:
     
-        miFormulario = EstudianteFormulario()
+        miForm = EstudianteFormulario()
  
-    return render(request, "estudiantes.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/estudiantes.html", {"miForm": miForm})
 
 def entregablesFormulario(request):
     print('method', request.method)
@@ -173,15 +170,15 @@ def entregablesFormulario(request):
  
             if miFormulario.is_valid():
                   informacion = miFormulario.cleaned_data
-                  entregable = Curso(nombre=informacion["nombre"], fechadeentrega=informacion["fechaDeEntrega"])
+                  entregable = Entregable(nombre=informacion["nombre"], fechadeentrega=informacion["fechaDeEntrega"])
                   entregable.save()
 
-            return render(request, "inicio.html")
+            return render(request, "AppCoder/inicio.html")
     else:
     
         miFormulario = EntregableFormulario()
  
-    return render(request, "entregables.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/entregables.html", {"miFormulario": miFormulario})
 
 def busquedaCamada(request):
     

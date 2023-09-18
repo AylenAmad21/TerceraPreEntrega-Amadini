@@ -5,11 +5,12 @@ class CursoFormulario(forms.Form):
     camada = forms.IntegerField()
 
 class EstudianteFormulario(forms.Form):
-    nombre = forms.CharField(max_length=30)
-    apellido = forms.CharField(max_length=30)
+    nombre = forms.CharField()
+    apellido = forms.CharField()
     email = forms.EmailField()
 
-class ProfesorFormulario(forms.Form):
+
+class ProfesorFormulario(forms.Form): 
     nombre = forms.CharField(max_length=40)
     apellido = forms.CharField(max_length=40)
     email = forms.EmailField()
@@ -18,7 +19,8 @@ class ProfesorFormulario(forms.Form):
 
 
 class EntregableFormulario(forms.Form):
-
     nombre = forms.CharField(max_length=30)
-    fechaDeEntrega = forms.DateField()
-    entregado = forms.BooleanField()
+    fechaDeEntrega = forms.DateField() 
+    entregado= forms.BooleanField()
+    
+    
